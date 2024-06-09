@@ -32,7 +32,8 @@ for row_num in range(len(example)):
     row = example[row_num]
     for col_num in range(len(row)):
         col = row[col_num]
-        if not col.isdigit() and col != '.':
+        if col == '*':
+            digits = []
             for r_change, c_change in [
                 (-1, -1), (-1, 0), (-1, 1),
                 (0, -1), (0, 1),
@@ -41,6 +42,8 @@ for row_num in range(len(example)):
                 check1 = check(row_num + r_change, col_num + c_change, '')
                 if check1 != '':
                     print(check1)
-                    sum_of_digit += int(check1)
+                    digits.append(int(check1))
+            if len(digits) == 2:
+                sum_of_digit += digits[0] * digits[1]
 
 print(sum_of_digit)

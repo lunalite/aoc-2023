@@ -6,15 +6,14 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"""
 
 example = document.split('\n')
 
-max_red = 12
-max_green = 13
-max_blue = 14
-
-valid_id_sum = 0
+sum_of_power = 0
 for i in example:
     game, records = i.split(':')
     game_id = game.split(' ')[1]
-    invalid = False
+
+    max_red = 0
+    max_blue = 0
+    max_green = 0
 
     for record in records.split(';'):
         for cube in record.split(','):
@@ -23,18 +22,13 @@ for i in example:
             color = split[2]
             if color == 'blue':
                 if num_of_cubes > max_blue:
-                    invalid = True
-                    break
+                    max_blue = num_of_cubes
             elif color == 'red':
                 if num_of_cubes > max_red:
-                    invalid = True
-                    break
+                    max_red = num_of_cubes
             elif color == 'green':
                 if num_of_cubes > max_green:
-                    invalid = True
-                    break
-        if invalid:
-            break
-    if invalid == False:
-        valid_id_sum += int(game_id)
-print(valid_id_sum)
+                    max_green = num_of_cubes
+    power = max_blue * max_green * max_red
+    sum_of_power += power
+print(sum_of_power)
